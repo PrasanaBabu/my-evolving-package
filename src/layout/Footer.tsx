@@ -1,11 +1,14 @@
 import {Box, Divider, Typography} from "@mui/material"
 
 const Footer = function(){
+
+    const copyrightYear: string = '2024';
+
     return(
         <Box>
             <Divider/>
             <Typography variant="body2" gutterBottom>
-                Copyright 2024 | My Evolving App ©️
+                Copyright {copyrightYear} | My Evolving App ©️
             </Typography>
         </Box>
     )

@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage';
 import NetflixPage from './pages/NetflixPage';
 import Products from './pages/Products';
 import About from './pages/About';
+import ErrorPage from './pages/ErrorPage';
 
 const StyledBox = styled(Box)`
   padding: 5px;
@@ -29,6 +30,7 @@ function App() {
                     <Route path={'/netflix'} element={<NetflixPage/>} />
                     <Route path={'/about'} element={<About/>} />
                     <Route path={'/products'} element={<Products/>} />
+                    <Route errorElement={<ErrorPage/>} />
                 </Routes>
             </div>
             {/*<StyledBox>*/}

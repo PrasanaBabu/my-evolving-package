@@ -1,0 +1,10 @@
+.selected{
+    background-color: green;
+    color: aqua;
+}
+
+
+.primary{
+    background-color: black;
+    color: white;
+}

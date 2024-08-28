@@ -1,18 +1,10 @@
-import {
-    AppBar,
-    Box,
-    Button,
-    Container,
-    IconButton,
-    Menu,
-    MenuItem,
-    Toolbar,
-    Typography
-} from '@mui/material';
+import {AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu'
 import ConstructionIcon from '@mui/icons-material/Construction';
-import React from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
+
+import './NavigationBar.css'
 
 
 const pages = ['Home', 'About', 'Products', 'Netflix'];
@@ -20,12 +12,27 @@ const pages = ['Home', 'About', 'Products', 'Netflix'];
 const NavigationBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
+    const [activePageName, setActivePageName] = useState('home');
+    const [resolution, setResolution] = useState('HD');
+
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
+
     };
-    const handleCloseNavMenu = () => {
+    const handleCloseNavMenu = (event: any, page?: string) => {
+        setActivePageName(() => page ?? 'none');
         setAnchorElNav(null);
     };
+
+    function handleResolutionChange() {
+        setResolution((previousResolution) => {
+            return previousResolution === 'HD' ? '4K' : 'HD';
+        })
+    }
+
+    function getClassNameBasedOnSelectedPage(page: string) {
+        return `${page.toLowerCase() == activePageName.toLowerCase() ? 'selected' : 'regular'}`;
+    }
 
     return (
         <AppBar position="static">
@@ -109,10 +116,11 @@ const NavigationBar = () => {
                     </Typography>
                     <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                         {pages.map((page) => (
-                            <Link to={`/${page.toLowerCase()}`}>
+                            <Link to={`/${page.toLowerCase()}`} key={page}
+                                  className={getClassNameBasedOnSelectedPage(page)}>
                                 <Button
                                     key={page}
-                                    onClick={handleCloseNavMenu}
+                                    onClick={() => handleCloseNavMenu(null, page.toLowerCase())}
                                     sx={{my: 2, color: 'white', display: 'block'}}
                                 >
                                     {page}
@@ -120,6 +128,8 @@ const NavigationBar = () => {
                             </Link>
                         ))}
                     </Box>
+                    <Typography variant={'h5'}>Resolution: {resolution}</Typography>
+                    <IconButton size={'large'} color={'inherit'} onClick={handleResolutionChange}> 🔄 </IconButton>
                 </Toolbar>
             </Container>
         </AppBar>
