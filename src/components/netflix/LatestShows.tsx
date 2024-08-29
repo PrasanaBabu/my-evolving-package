@@ -32,7 +32,7 @@ const LatestShows = (props: LatestShowsProps) => {
     function getAllLatestShowElements() {
         return mockLatestShows.map((show: LatestShow, index: number) => {
             return (
-                <Grid item xs={12} sm={5} m={4} xl={3} key={show.title}>
+                <Grid item xs={12} sm={5} m={4} xl={3} key={show.id}>
                     <LatestShow show={show} index={index} favouriteClick={handleFavouriteClick}/>
                 </Grid>
             );

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import './NavigationBar.css'
 
 
-const pages = ['Home', 'About', 'Products', 'Netflix'];
+const pages = ['Home', 'About', 'Products', 'Netflix', 'Users'];
 
 const NavigationBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);

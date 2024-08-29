@@ -11,6 +11,19 @@ import NetflixPage from './pages/NetflixPage';
 import Products from './pages/Products';
 import About from './pages/About';
 import ErrorPage from './pages/ErrorPage';
+import UserManagementPage from './pages/UserManagementPage';
+import CreateUserPage from './pages/CreateUserPage';
+import UserDetails from './pages/UserDetails';
+
+import {
+    QueryClient,
+    QueryClientProvider,
+    useQuery,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient()
+
+
 
 const StyledBox = styled(Box)`
   padding: 5px;
@@ -20,6 +33,7 @@ const StyledBox = styled(Box)`
 
 function App() {
     return (
+        <QueryClientProvider client={queryClient}>
         <BrowserRouter>
 
             <div className={'header-section2'}>
@@ -30,7 +44,10 @@ function App() {
                     <Route path={'/netflix'} element={<NetflixPage/>} />
                     <Route path={'/about'} element={<About/>} />
                     <Route path={'/products'} element={<Products/>} />
-                    <Route errorElement={<ErrorPage/>} />
+                    <Route path={'/users'} element={<UserManagementPage />} />
+                    <Route path={'/users/:id'} element={<UserDetails />} />
+                    <Route path={'/users/create'} element={<CreateUserPage />} />
+                    <Route path={'/*'} element={ <ErrorPage/>} />
                 </Routes>
             </div>
             {/*<StyledBox>*/}
@@ -40,6 +57,7 @@ function App() {
                 <Footer/>
             </div>
         </BrowserRouter>
+        </QueryClientProvider>
     );
 }
 
