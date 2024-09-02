@@ -21,6 +21,7 @@ import {
     useQuery,
 } from '@tanstack/react-query'
 import {HelmetProvider} from 'react-helmet-async';
+import CounterPage from './pages/CounterPage';
 
 const queryClient = new QueryClient()
 
@@ -44,6 +45,7 @@ function App() {
                             <Route path={'/netflix'} element={<NetflixPage/>}/>
                             <Route path={'/about'} element={<About/>}/>
                             <Route path={'/products'} element={<Products/>}/>
+                            <Route path={'/counter'} element={<CounterPage/>}/>
                             <Route path={'/users'} element={<UserManagementPage/>}/>
                             <Route path={'/users/:id'} element={<UserDetails/>}/>
                             <Route path={'/users/create'} element={<CreateUserPage/>}/>

@@ -1,16 +1,10 @@
 import {Button, Card, CardActions, CardContent, CardMedia, Container, Grid, Typography} from '@mui/material';
 import {useMutation, useQuery} from '@tanstack/react-query';
-
-
-type Product = {
-    id: number;
-    title: string;
-    price: number;
-    category: string;
-    description: string;
-    image: string;
-
-}
+import ProductItem from '../components/products/ProductItem';
+import IconButton from '@mui/material/IconButton';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {useCart} from '../store/useCart';
+import {Product} from '../models/Product';
 
 async function fetchProducts(): Promise<Product[]> {
 
@@ -32,6 +26,8 @@ const Products = () => {
         }
     );
 
+
+    const {cartItems} =  useCart();
     function handleCartAddition(productId: number) {
         console.log('Added to cart product with id:  ', productId);
     }
@@ -42,7 +38,18 @@ const Products = () => {
 
     return (
         <Container>
-            <h1>Products</h1>
+            {/*bar with products and watchlist and cart icon with number of items on the top*/}
+            <Container sx={{display: 'inline-flex'}}>
+
+
+
+                <h1>Products</h1>
+                <IconButton sx={{'margin-left': '80%'}} color="primary" aria-label="add to shopping cart">
+                    <AddShoppingCartIcon/>
+                    {cartItems.length}
+                </IconButton>
+            </Container>
+
 
             {isPending && <Typography variant="h3">Loading...</Typography>}
 
@@ -50,29 +57,9 @@ const Products = () => {
 
             <Grid container spacing={2}>
                 {
-                    products?.map((product: any) => {
+                    products?.map((product: Product) => {
                         return (
-                            <Grid item xs={12} sm={6} md={4} key={product.id}>
-                                <Card>
-                                    <CardMedia
-                                        sx={{height: 140}}
-                                        image={product?.image}
-                                        title={product?.title}
-                                    />
-                                    <CardContent>
-                                        <Typography gutterBottom variant="h5" component="div">
-                                            {product?.category}
-                                        </Typography>
-                                        <Typography variant="body2" sx={{color: "text.secondary"}}>
-                                            {product?.description}
-                                        </Typography>
-                                    </CardContent>
-                                    <CardActions>
-                                        <Button size="small" variant="contained" color="error" onClick={() => handleCartAddition(product.id)}>Add To Cart</Button>
-                                        <Button size="small" variant="outlined" onClick={()=> handleWatchListAddition(product.id)}>Add to Wishlist</Button>
-                                    </CardActions>
-                                </Card>
-                            </Grid>
+                            <ProductItem product={product} key={product.id}/>
                         )
                     })
                 }
