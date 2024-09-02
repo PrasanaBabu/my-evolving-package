@@ -29,12 +29,12 @@ function LatestShow(props: LatestShowProps) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <IconButton color="secondary" aria-label="add an alarm">
+                <IconButton color="secondary" aria-label="add an alarm" onClick={()=>handleWatchLaterClick(index)}>
                     {
-                        show.isFavorite && <FavoriteIcon onClick={()=>handleWatchLaterClick(index)} color={'warning'}/>
+                        show.isFavorite && <FavoriteIcon color={'warning'}/>
                     }
                     {
-                        !show.isFavorite && <FavoriteIcon onClick={()=>handleWatchLaterClick(index)} color={'info'}/>
+                        !show.isFavorite && <FavoriteIcon color={'info'}/>
                     }
                 </IconButton>
                 <Button size="small">Learn More</Button>

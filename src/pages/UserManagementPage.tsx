@@ -13,12 +13,18 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from '@emotion/styled';
+import {ToastContainer} from 'react-toastify';
 
 interface IUser {
     id: number;
     name: string;
     phone: string;
 }
+
+const styledContainer = styled('div')`
+  
+`;
 
 const UserManagementPage = () => {
     console.log("Program Started");
@@ -69,6 +75,19 @@ const UserManagementPage = () => {
                 }),
             })}
         >
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
+
             <Container
                 sx={{
                     display: "flex",

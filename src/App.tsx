@@ -20,9 +20,9 @@ import {
     QueryClientProvider,
     useQuery,
 } from '@tanstack/react-query'
+import {HelmetProvider} from 'react-helmet-async';
 
 const queryClient = new QueryClient()
-
 
 
 const StyledBox = styled(Box)`
@@ -34,29 +34,30 @@ const StyledBox = styled(Box)`
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-
-            <div className={'header-section2'}>
-                <Header/>
-                <Routes>
-                    <Route path={'/'} element={<HomePage/>} />
-                    <Route path={'/home'} element={<HomePage/>} />
-                    <Route path={'/netflix'} element={<NetflixPage/>} />
-                    <Route path={'/about'} element={<About/>} />
-                    <Route path={'/products'} element={<Products/>} />
-                    <Route path={'/users'} element={<UserManagementPage />} />
-                    <Route path={'/users/:id'} element={<UserDetails />} />
-                    <Route path={'/users/create'} element={<CreateUserPage />} />
-                    <Route path={'/*'} element={ <ErrorPage/>} />
-                </Routes>
-            </div>
-            {/*<StyledBox>*/}
-            {/*    <Typography variant={'h1'}> Success </Typography>*/}
-            {/*</StyledBox>*/}
-            <div className={'footer-section'}>
-                <Footer/>
-            </div>
-        </BrowserRouter>
+            <BrowserRouter>
+                <HelmetProvider>
+                    <div className={'header-section2'}>
+                        <Header/>
+                        <Routes>
+                            <Route path={'/'} element={<HomePage/>}/>
+                            <Route path={'/home'} element={<HomePage/>}/>
+                            <Route path={'/netflix'} element={<NetflixPage/>}/>
+                            <Route path={'/about'} element={<About/>}/>
+                            <Route path={'/products'} element={<Products/>}/>
+                            <Route path={'/users'} element={<UserManagementPage/>}/>
+                            <Route path={'/users/:id'} element={<UserDetails/>}/>
+                            <Route path={'/users/create'} element={<CreateUserPage/>}/>
+                            <Route path={'/*'} element={<ErrorPage/>}/>
+                        </Routes>
+                    </div>
+                    {/*<StyledBox>*/}
+                    {/*    <Typography variant={'h1'}> Success </Typography>*/}
+                    {/*</StyledBox>*/}
+                    <div className={'footer-section'}>
+                        <Footer/>
+                    </div>
+                </HelmetProvider>
+            </BrowserRouter>
         </QueryClientProvider>
     );
 }

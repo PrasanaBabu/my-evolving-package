@@ -2,7 +2,7 @@ import {AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typ
 import MenuIcon from '@mui/icons-material/Menu'
 import ConstructionIcon from '@mui/icons-material/Construction';
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 import './NavigationBar.css'
 
@@ -12,7 +12,7 @@ const pages = ['Home', 'About', 'Products', 'Netflix', 'Users'];
 const NavigationBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
-    const [activePageName, setActivePageName] = useState('home');
+    const location = useLocation();
     const [resolution, setResolution] = useState('HD');
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -20,7 +20,6 @@ const NavigationBar = () => {
 
     };
     const handleCloseNavMenu = (event: any, page?: string) => {
-        setActivePageName(() => page ?? 'none');
         setAnchorElNav(null);
     };
 
@@ -31,7 +30,7 @@ const NavigationBar = () => {
     }
 
     function getClassNameBasedOnSelectedPage(page: string) {
-        return `${page.toLowerCase() == activePageName.toLowerCase() ? 'selected' : 'regular'}`;
+        return `${location.pathname.includes(page.toLowerCase()) ? 'selected' : 'regular'}`;
     }
 
     return (

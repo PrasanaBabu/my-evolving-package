@@ -1,5 +1,6 @@
 import {Container} from '@mui/material';
 import {useRef, useState} from 'react';
+import {Helmet} from 'react-helmet-async';
 
 const About = () => {
     const [name, setName] = useState("");
@@ -19,6 +20,10 @@ const About = () => {
 
     return (
         <Container>
+            <Helmet>
+                <title>About Page</title>
+                <link rel="canonical" href="https://www.tacobell.com/" />
+            </Helmet>
             <h1>About Page</h1>
             <p>Controlled Components - Demo</p>
             <div>

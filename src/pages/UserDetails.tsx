@@ -2,6 +2,8 @@ import {Button, Card, CardActions, CardContent, Container, Typography} from '@mu
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {useQuery} from '@tanstack/react-query';
+import {useParams} from 'react-router-dom';
+import styled from '@emotion/styled';
 
 interface IUser {
     id: number;
@@ -10,35 +12,39 @@ interface IUser {
     email: string;
 
 }
+
+const styledContainer = styled('div')`
+`;
+
+const fetchUserDetails = async (id: string): Promise<IUser> => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users/' + id);
+    return response.json();
+}
+
+async function fetchUserDetailsWithId(id: string | undefined) {
+    console.log('id', id)
+
+        let response = await fetch('https://jsonplaceholder.typicode.com/users/' + id);
+        if (response.ok){
+            return response.json();
+        }
+        else {
+            throw new Error('Error while fetching user details')
+        }
+
+}
+
 const UserDetails = () => {
 
-    const userId = 1;
-    const [user, setUser] = useState({email: ''} as IUser);
+    const { id} = useParams();
 
-    const { isPending, error, data } = useQuery({
-        queryKey: ['repoData'],
-        queryFn: () =>
-            fetch('https://jsonplaceholder.typicode.com/users/' + user.id).then((res) =>
-                res.json(),
-            ),
+
+    const {isPending, error, data: userDetails} = useQuery({
+        queryKey: ['userDetails'],
+        queryFn: () => fetchUserDetailsWithId(id),
     })
 
-    useEffect(() => {
-
-    axios.get('https://jsonplaceholder.typicode.com/users/' + user.id)
-        .then((response) => {
-            console.log('User Details', response.data);
-            setUser(response.data)
-        })
-        .catch((error) => {
-            console.log('Error while fetching user details', error);
-        })
-        .finally(() => {
-            console.log('User Details fetched finally');
-        });
-    }, []);
-
-
+    console.log('errror', error);
 
     return (
         <Container>
@@ -47,16 +53,16 @@ const UserDetails = () => {
                 <CardContent>
                     <Typography
                         gutterBottom
-                        sx={{ color: "text.secondary", fontSize: 14 }}
+                        sx={{color: "text.secondary", fontSize: 14}}
                     >
-                        User Id: {user?.id}
+                        User Id: {userDetails?.id}
                     </Typography>
                     <Typography variant="h5" component="div">
-                        John Doe
+                        {userDetails?.name}
                     </Typography>
 
-                    <Typography variant="body2">Phone: 1234567890</Typography>
-                    <Typography variant="body2">EMail: a@k.com</Typography>
+                    <Typography variant="body2">Phone: {userDetails?.phone}</Typography>
+                    <Typography variant="body2">Email: {userDetails?.email}</Typography>
                 </CardContent>
                 <CardActions>
                     <Button size="small" variant="contained">
