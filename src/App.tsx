@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css'
 import Header from './layout/Header';
 import Footer from './layout/Footer';
-import {Box, Typography} from '@mui/material';
+import {Box} from '@mui/material';
 
 import styled from '@emotion/styled'
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
@@ -18,19 +18,15 @@ import UserDetails from './pages/UserDetails';
 import {
     QueryClient,
     QueryClientProvider,
-    useQuery,
+
 } from '@tanstack/react-query'
 import {HelmetProvider} from 'react-helmet-async';
 import CounterPage from './pages/CounterPage';
+import TodosPage from './pages/TodosPage';
+import MainRouter from './routes/MainRouter';
 
 const queryClient = new QueryClient()
 
-
-const StyledBox = styled(Box)`
-  padding: 5px;
-  margin: 15px;
-  text-align: center;
-`;
 
 function App() {
     return (
@@ -39,18 +35,7 @@ function App() {
                 <HelmetProvider>
                     <div className={'header-section2'}>
                         <Header/>
-                        <Routes>
-                            <Route path={'/'} element={<HomePage/>}/>
-                            <Route path={'/home'} element={<HomePage/>}/>
-                            <Route path={'/netflix'} element={<NetflixPage/>}/>
-                            <Route path={'/about'} element={<About/>}/>
-                            <Route path={'/products'} element={<Products/>}/>
-                            <Route path={'/counter'} element={<CounterPage/>}/>
-                            <Route path={'/users'} element={<UserManagementPage/>}/>
-                            <Route path={'/users/:id'} element={<UserDetails/>}/>
-                            <Route path={'/users/create'} element={<CreateUserPage/>}/>
-                            <Route path={'/*'} element={<ErrorPage/>}/>
-                        </Routes>
+                        <MainRouter/>
                     </div>
                     {/*<StyledBox>*/}
                     {/*    <Typography variant={'h1'}> Success </Typography>*/}

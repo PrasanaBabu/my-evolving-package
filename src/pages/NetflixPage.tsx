@@ -50,7 +50,7 @@ const NetflixPage = () => {
         updatedShows[index] = {...selectedShow, isFavorite: !selectedShow.isFavorite};
 
         console.log('updated shows:: ', updatedShows);
-        setShows(()=>updatedShows);
+        setShows(updatedShows);
     }
 
     return (
@@ -61,7 +61,7 @@ const NetflixPage = () => {
             <Box sx={{textAlign: 'center', padding: '0 10% 0 10%'}}>
                 <Typography variant={'h1'}>Netflix Page</Typography>
                 <LatestShows shows={shows} favouriteShowClick={handleFavouriteShowAction}/>
-                <TrendingShows/>
+                {/*<TrendingShows/>*/}
                 <RecommendedShows shows={shows} favouriteShowClick={handleFavouriteShowAction}/>
             </Box>
         </>

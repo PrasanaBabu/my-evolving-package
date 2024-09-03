@@ -1,16 +1,20 @@
 import {Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Typography} from '@mui/material';
 import {LatestShowProps} from './LatestShows';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import './RecommendedShow.css'
 import {Favorite} from '@mui/icons-material';
 
 const RecommendedShow = (props: LatestShowProps) => {
+
+
     const [watchLaterItem, setWatchLaterItem] = useState(false)
 
     function handleFavouriteClicked(index: number) {
         props.favouriteClick(index);
     }
+
+
 
     return (
         <>
